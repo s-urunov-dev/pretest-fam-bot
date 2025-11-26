@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bot Dashboard</title>
+<style>
+body { font-family: Arial; padding: 20px; background:#f7f7f7;}
+h1 { color:#182966; }
+table { border-collapse: collapse; width:100%; background:#fff; }
+th, td { padding:10px; border:1px solid #ddd; }
+th { background:#182966; color:#fff;}
+tr:nth-child(even){background:#f2f2f2;}
+.count-box{background:#182966; color:#fff; padding:10px 20px; border-radius:8px; display:inline-block; margin-bottom:20px;}
+</style>
+</head>
+<body>
+<h1>Bot Dashboard</h1>
+<div class="count-box">Xa Count: {{ xa_count }}</div>
+
+<h2>Start bosgan barcha userlar</h2>
+<table>
+<tr><th>#</th><th>Telegram ID</th><th>Full Name</th><th>Joined At</th></tr>
+{% set idx=1 %}
+{% for user in users %}
+<tr>
+<td>{{ loop.index }}</td>
+<td>{{ user.telegram_id }}</td>
+<td>{{ user.full_name }}</td>
+<td>{{ user.joined_at }}</td>
+</tr>
+{% set idx = idx + 1 %}
+{% endfor %}
+</table>
+</body>
+</html>
