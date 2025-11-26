@@ -277,7 +277,7 @@ async def main():
 
     # Run bot and FastAPI together
     from uvicorn import Config, Server
-    config = Config(app=app, host="0.0.0.0", port=8000, log_level="info")
+    config = Config(app=app, host="0.0.0.0", port=8888, log_level="info")
     server = Server(config)
     await asyncio.gather(dp.start_polling(bot), server.serve())
 
