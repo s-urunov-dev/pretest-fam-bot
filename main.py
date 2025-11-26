@@ -1,25 +1,26 @@
 import asyncio
+import datetime
 import logging
-from pyexpat.errors import messages
+import os
 
 from aiogram import Bot, Dispatcher, types, F
+from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, InputFile, FSInputFile
-from aiogram.utils.keyboard import InlineKeyboardBuilder
-from aiogram.filters import Command
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, FSInputFile
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, func, ForeignKey, BigInteger
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.future import select
-import datetime
+from sqlalchemy.orm import sessionmaker, declarative_base
 
+load_dotenv()
 
-TOKEN = "8360201816:AAF7pOgoZnIdvrpJlypvkeu_yhdfre3AOdE"
-DATABASE_URL = "postgresql+asyncpg://postgres:1@localhost:5432/pretest_fam_bot"
+TOKEN = os.getenv("BOT_TOKEN")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -110,7 +111,6 @@ async def start(message: types.Message):
             await session.commit()
 
     # Local rasm yuborish
-    from aiogram.types import InputFile
     image = FSInputFile('niner.jpg')
 
     await message.answer_photo(
